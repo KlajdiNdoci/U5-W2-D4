@@ -1,6 +1,7 @@
 package KlajdiNdoci.U5W2D3.payloads.posts;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -20,5 +21,7 @@ public record NewPostDTO(
         String cover,
         @NotEmpty(message = "Il tempo di lettura deve essere necessariamente inserito!")
         @Pattern(regexp = "^[0-9]+$", message = "Inserisci un numero valido")
-        String tempoDiLettura
+        String tempoDiLettura,
+        @NotNull
+        long utenteId
 ){}

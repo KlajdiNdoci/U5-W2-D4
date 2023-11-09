@@ -26,16 +26,4 @@ public class Post {
     private Utente utente;
     @CreationTimestamp
     private Date createdAt;
-    @Override
-    public String toString() {
-        return "BlogPost{" +
-                "id=" + id +
-                ", categoria='" + categoria + '\'' +
-                ", titolo='" + titolo + '\'' +
-                ", cover='" + cover + '\'' +
-                ", contenuto='" + contenuto + '\'' +
-                ", tempoDiLettura=" + tempoDiLettura +
-                ", autore=" + utente.getId() +
-                '}';
-    }
 }

@@ -24,6 +24,8 @@ public class PostService {
     private PostRepository postRepository;
 
     @Autowired
+    private UtenteService utenteService;
+    @Autowired
     private Cloudinary cloudinary;
 
     public Page<Post> getPosts(int page, int size, String orderBy) {
@@ -32,10 +34,12 @@ public class PostService {
     }
 
     public Post save(NewPostDTO body) throws IOException {
+        Utente found = utenteService.findById(body.utenteId());
         Post newPost = new Post();
         newPost.setCategoria(body.categoria());
         newPost.setTitolo(body.titolo());
         newPost.setContenuto(body.contenuto());
+        newPost.setUtente(found);
         newPost.setCover(body.cover());
         newPost.setTempoDiLettura(Integer.parseInt(body.tempoDiLettura()));
         postRepository.save(newPost);
