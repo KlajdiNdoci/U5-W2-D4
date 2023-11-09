@@ -12,16 +12,13 @@ public record NewPostDTO(
         String categoria,
         @NotEmpty(message = "Il titolo deve essere necessariamente inserito!")
         @Size(min = 1, message = "Il titolo deve avere almeno un carattere")
-        String Titolo,
-        @NotEmpty(message = "Il cognome deve essere necessariamente inserito!" )
+        String titolo,
+        @NotEmpty(message = "Il contenuto deve essere necessariamente inserito!" )
         String contenuto,
         @NotEmpty(message = "La cover deve essere necessariamente inserita!")
         @Pattern(regexp = "^(http(s):\\/\\/.)[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$", message = "L'URL della cover non è valido")
         String cover,
         @NotEmpty(message = "Il tempo di lettura deve essere necessariamente inserito!")
         @Pattern(regexp = "^[0-9]+$", message = "Inserisci un numero valido")
-        String tempoDiLettura,
-        @NotEmpty(message = "L'email deve essere necessariamente inserita")
-        @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "L'email inserita non é valida")
-        String email
+        String tempoDiLettura
 ){}

@@ -1,12 +1,17 @@
 package KlajdiNdoci.U5W2D3.controllers;
 
 import KlajdiNdoci.U5W2D3.entities.Post;
+import KlajdiNdoci.U5W2D3.exceptions.BadRequestException;
+import KlajdiNdoci.U5W2D3.payloads.posts.NewPostDTO;
 import KlajdiNdoci.U5W2D3.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -24,8 +29,16 @@ public class PostController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public Post savePost(@RequestBody Post body) {
-        return postService.save(body);
+    public Post savePost(@RequestBody @Validated NewPostDTO body, BindingResult validation) {
+        if (validation.hasErrors()){
+            throw new BadRequestException(validation.getAllErrors());
+        }else {
+            try {
+                return postService.save(body);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @GetMapping("/{id}")
