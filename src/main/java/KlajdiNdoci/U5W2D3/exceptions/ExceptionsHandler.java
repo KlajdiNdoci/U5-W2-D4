@@ -1,5 +1,6 @@
 package KlajdiNdoci.U5W2D3.exceptions;
 
+import KlajdiNdoci.U5W2D3.payloads.ErrorsResponseDTO;
 import KlajdiNdoci.U5W2D3.payloads.ErrorsResponseWithListDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
@@ -26,13 +27,13 @@ public class ExceptionsHandler {
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorsPayload handleNotFound(NotFoundException e){
-        return new ErrorsPayload(e.getMessage(), new Date());
+    public ErrorsResponseDTO handleNotFound(NotFoundException e){
+        return new ErrorsResponseDTO(e.getMessage(), new Date());
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorsPayload handleGenericError(Exception e){
-        return new ErrorsPayload("server error", new Date());
+    public ErrorsResponseDTO handleGenericError(Exception e){
+        return new ErrorsResponseDTO("server error", new Date());
     }
 }
