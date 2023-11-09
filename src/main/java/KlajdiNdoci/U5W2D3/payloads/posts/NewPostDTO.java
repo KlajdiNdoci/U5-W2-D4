@@ -23,8 +23,5 @@ public record NewPostDTO(
         String tempoDiLettura,
         @NotEmpty(message = "L'email deve essere necessariamente inserita")
         @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "L'email inserita non é valida")
-        String email,
-        @NotEmpty(message = "La data di nascita deve essere necessariamente inserita!" )
-        @Pattern(regexp = "^\\\\d{4}-\\\\d{2}-\\\\d{2}$", message = "La data inserita non é valida")
-        LocalDate dataDiNascita
+        String email
 ){}

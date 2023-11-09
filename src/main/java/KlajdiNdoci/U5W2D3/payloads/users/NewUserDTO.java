@@ -1,8 +1,9 @@
 package KlajdiNdoci.U5W2D3.payloads.users;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public record NewUserDTO(
@@ -16,7 +17,6 @@ public record NewUserDTO(
         @NotEmpty(message = "L'email deve essere necessariamente inserita")
         @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "L'email inserita non é valida")
         String email,
-        @NotEmpty(message = "La data di nascita deve essere necessariamente inserita!" )
-        @Pattern(regexp = "^\\\\d{4}-\\\\d{2}-\\\\d{2}$", message = "La data inserita non é valida")
+        @NotNull(message = "La data di nascita deve essere necessariamente inserita!")
         LocalDate dataDiNascita
 ){}

@@ -2,6 +2,8 @@ package KlajdiNdoci.U5W2D3.services;
 
 import KlajdiNdoci.U5W2D3.entities.Utente;
 import KlajdiNdoci.U5W2D3.exceptions.NotFoundException;
+import KlajdiNdoci.U5W2D3.payloads.posts.NewPostDTO;
+import KlajdiNdoci.U5W2D3.payloads.users.NewUserDTO;
 import KlajdiNdoci.U5W2D3.repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -24,10 +27,14 @@ public class UtenteService {
         return utenteRepository.findAll(pageable);
     }
 
-    public Utente save(Utente body) {
-        body.setAvatar("https://ui-avatars.com/api/?name=" + body.getNome() + "+" + body.getCognome());
-        utenteRepository.save(body);
-        return body;
+    public Utente save(NewUserDTO body) throws IOException {
+        Utente newUser = new Utente();
+        newUser.setAvatar("https://ui-avatars.com/api/?name=" + body.nome() + "+" + body.cognome());
+        newUser.setNome(body.nome());
+        newUser.setCognome(body.cognome());
+        newUser.setEmail(body.email());
+        utenteRepository.save(newUser);
+        return newUser;
     }
 
     public Utente findById(long id) throws NotFoundException{
