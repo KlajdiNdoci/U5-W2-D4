@@ -1,5 +1,6 @@
 package KlajdiNdoci.U5W2D3.services;
 
+import KlajdiNdoci.U5W2D3.config.EmailSender;
 import KlajdiNdoci.U5W2D3.entities.Utente;
 import KlajdiNdoci.U5W2D3.exceptions.NotFoundException;
 import KlajdiNdoci.U5W2D3.payloads.users.NewUserDTO;
@@ -23,6 +24,8 @@ public class UtenteService {
 
     @Autowired
     private Cloudinary cloudinary;
+    @Autowired
+    EmailSender emailSender;
 
     public Page<Utente> getUtenti(int page, int size, String orderBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
@@ -35,8 +38,9 @@ public class UtenteService {
         newUser.setNome(body.nome());
         newUser.setCognome(body.cognome());
         newUser.setEmail(body.email());
-        utenteRepository.save(newUser);
-        return newUser;
+        Utente savedUser = utenteRepository.save(newUser);
+        emailSender.sendRegistrationEmail(body.email());
+        return savedUser;
     }
 
     public Utente findById(long id) throws NotFoundException{
