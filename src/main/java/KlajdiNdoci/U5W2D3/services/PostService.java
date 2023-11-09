@@ -86,12 +86,12 @@ public class PostService {
         }
     }
 
-    public String uploadPicture(MultipartFile file, long id) throws IOException {
+    public Post uploadPicture(MultipartFile file, long id) throws IOException {
         Post post = postRepository.findById(id).orElseThrow(()-> new NotFoundException(id));
         String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         post.setCover(url);
         postRepository.save(post);
-        return url;
+        return post;
     }
 
 }

@@ -60,7 +60,7 @@ public class UtenteController {
     }
 
     @PostMapping("/{id}/upload")
-    public String upload(@RequestParam("avatar") MultipartFile body, @PathVariable long id) throws IOException {
+    public Utente upload(@RequestParam("avatar") MultipartFile body, @PathVariable long id) throws IOException {
         return utenteService.uploadPicture(body, id);
     }
 }

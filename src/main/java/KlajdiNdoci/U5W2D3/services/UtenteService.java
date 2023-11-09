@@ -38,6 +38,7 @@ public class UtenteService {
         newUser.setNome(body.nome());
         newUser.setCognome(body.cognome());
         newUser.setEmail(body.email());
+        newUser.setDataDiNascita(body.dataDiNascita());
         Utente savedUser = utenteRepository.save(newUser);
         emailSender.sendRegistrationEmail(body.email());
         return savedUser;
@@ -81,11 +82,11 @@ public class UtenteService {
             return utenteRepository.save(found);
         }
     }
-    public String uploadPicture(MultipartFile file, long id) throws IOException {
+    public Utente uploadPicture(MultipartFile file, long id) throws IOException {
         Utente utente = utenteRepository.findById(id).orElseThrow(()-> new NotFoundException(id));
         String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         utente.setAvatar(url);
         utenteRepository.save(utente);
-        return url;
+        return utente;
     }
 }

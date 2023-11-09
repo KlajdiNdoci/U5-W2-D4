@@ -59,7 +59,7 @@ public class PostController {
     }
 
     @PostMapping("/{id}/upload")
-    public String upload(@RequestParam("cover") MultipartFile body, @PathVariable long id) throws IOException {
+    public Post upload(@RequestParam("cover") MultipartFile body, @PathVariable long id) throws IOException {
         return postService.uploadPicture(body, id);
     }
 }
