@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -55,5 +56,10 @@ public class PostController {
     @PutMapping("/{id}")
     public Post findByIdAndUpdate(@PathVariable int id, @RequestBody Post body) {
         return postService.findByIdAndUpdate(id, body);
+    }
+
+    @PostMapping("/{id}/upload")
+    public String upload(@RequestParam("cover") MultipartFile body, @PathVariable long id) throws IOException {
+        return postService.uploadPicture(body, id);
     }
 }

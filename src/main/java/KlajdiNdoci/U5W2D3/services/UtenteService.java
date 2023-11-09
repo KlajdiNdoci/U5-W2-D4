@@ -2,25 +2,27 @@ package KlajdiNdoci.U5W2D3.services;
 
 import KlajdiNdoci.U5W2D3.entities.Utente;
 import KlajdiNdoci.U5W2D3.exceptions.NotFoundException;
-import KlajdiNdoci.U5W2D3.payloads.posts.NewPostDTO;
 import KlajdiNdoci.U5W2D3.payloads.users.NewUserDTO;
 import KlajdiNdoci.U5W2D3.repositories.UtenteRepository;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 @Service
 public class UtenteService {
     @Autowired
     private UtenteRepository utenteRepository;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
     public Page<Utente> getUtenti(int page, int size, String orderBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
@@ -74,5 +76,12 @@ public class UtenteService {
         } else {
             return utenteRepository.save(found);
         }
+    }
+    public String uploadPicture(MultipartFile file, long id) throws IOException {
+        Utente utente = utenteRepository.findById(id).orElseThrow(()-> new NotFoundException(id));
+        String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        utente.setAvatar(url);
+        utenteRepository.save(utente);
+        return url;
     }
 }
