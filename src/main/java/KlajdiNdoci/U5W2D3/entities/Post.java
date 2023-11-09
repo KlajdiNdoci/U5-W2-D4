@@ -1,6 +1,5 @@
-package KlajdiNdoci.U5W2D3.post;
+package KlajdiNdoci.U5W2D3.entities;
 
-import KlajdiNdoci.U5W2D3.utente.Utente;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

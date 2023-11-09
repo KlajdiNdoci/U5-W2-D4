@@ -1,6 +1,6 @@
-package KlajdiNdoci.U5W2D3.utente;
+package KlajdiNdoci.U5W2D3.entities;
 
-import KlajdiNdoci.U5W2D3.post.Post;
+import KlajdiNdoci.U5W2D3.entities.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;

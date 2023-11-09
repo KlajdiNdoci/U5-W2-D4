@@ -1,5 +1,6 @@
-package KlajdiNdoci.U5W2D3.post;
+package KlajdiNdoci.U5W2D3.repositories;
 
+import KlajdiNdoci.U5W2D3.entities.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

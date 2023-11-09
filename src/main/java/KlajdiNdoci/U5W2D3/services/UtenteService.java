@@ -1,6 +1,8 @@
-package KlajdiNdoci.U5W2D3.utente;
+package KlajdiNdoci.U5W2D3.services;
 
+import KlajdiNdoci.U5W2D3.entities.Utente;
 import KlajdiNdoci.U5W2D3.exceptions.NotFoundException;
+import KlajdiNdoci.U5W2D3.repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

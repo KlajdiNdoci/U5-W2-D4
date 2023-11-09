@@ -1,6 +1,7 @@
-package KlajdiNdoci.U5W2D3.post;
+package KlajdiNdoci.U5W2D3.controllers;
 
-import KlajdiNdoci.U5W2D3.utente.Utente;
+import KlajdiNdoci.U5W2D3.entities.Post;
+import KlajdiNdoci.U5W2D3.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,8 @@ public class PostController {
 
     @GetMapping("")
     public Page<Post> getPosts(@RequestParam(defaultValue = "0") int page,
-                                @RequestParam(defaultValue = "10") int size,
-                                @RequestParam(defaultValue = "id") String orderBy){
+                               @RequestParam(defaultValue = "10") int size,
+                               @RequestParam(defaultValue = "id") String orderBy){
         return postService.getPosts(page, size, orderBy);
     }
 

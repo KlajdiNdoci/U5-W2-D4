@@ -1,5 +1,7 @@
-package KlajdiNdoci.U5W2D3.utente;
+package KlajdiNdoci.U5W2D3.controllers;
 
+import KlajdiNdoci.U5W2D3.entities.Utente;
+import KlajdiNdoci.U5W2D3.services.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
